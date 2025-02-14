@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於我們</title>
+  <style>
+    img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+
+
+<img src="./F201.png" usemap="#webmap" alt="官網設計圖" style="width:100%;">
+
+<map name="webmap">
+  <area shape="rect" coords="53,20,766,93" href="page1.html" alt="關於我們">
+  <area shape="rect" coords="804,10,912,93" href="page2.html" alt="服務項目">
+  <area shape="rect" coords="952,12,1065,86" href="page3.html" alt="事業體介紹">
+  <area shape="rect" coords="1097,6,1222,93" href="page4.html" alt="建案介紹">
+  <area shape="rect" coords="1240,10,1371,93" href="page5.html" alt="都更專區">
+  <area shape="rect" coords="1399,12,1514,89" href="page6.html" alt="最新消息">
+  <area shape="rect" coords="1544,4,1655,85" href="page7.html" alt="人才招募">
+  <area shape="rect" coords="1681,-2,1877,109" href="page8.html" alt="聯絡我們">
+  <area shape="rect" coords="232,583,498,673" href="page8.html" alt="VIEW MORE">
+</map>
+
+<!-- 第二張圖片 -->
+<img src="F202.png" usemap="#webmap2" alt="">
+<map name="webmap2">
+  <area shape="rect" coords="0,0,200,200" href="page3.html" alt="功能3">
+  <area shape="rect" coords="200,0,400,200" href="page4.html" alt="功能4">
+  
+</map>
+<!-- 第三張圖片 -->
+<img src="F203.png" usemap="#webmap3" alt="">
+<map name="webmap3">
+  <area shape="rect" coords="0,0,200,200" href="page3.html" alt="功能3">
+  <area shape="rect" coords="200,0,400,200" href="page4.html" alt="功能4">
+  
+</map>
+<!-- 第四張圖片 -->
+<img src="F08.png" usemap="#webmap4" alt="">
+<map name="webmap4">
+  <area shape="rect" coords="0,0,200,200" href="page3.html" alt="功能3">
+  <area shape="rect" coords="200,0,400,200" href="page4.html" alt="功能4">
+  
+</map>
+<script>
+    // 確保圖片映射在行動裝置上可用
+    window.addEventListener('resize', setCoords);
+    window.addEventListener('load', setCoords);
+  
+    function setCoords() {
+      const img = document.querySelector('img[usemap]');
+      const map = document.querySelector('map');
+      const widthRatio = img.naturalWidth / img.clientWidth;
+      const heightRatio = img.naturalHeight / img.clientHeight;
+  
+      map.querySelectorAll('area').forEach(area => {
+        const originalCoords = area.dataset.coords || area.coords;
+        area.dataset.coords = originalCoords;
+        const coords = originalCoords.split(',').map((coord, index) => {
+          return index % 2 === 0 ? coord / widthRatio : coord / heightRatio;
+        });
+        area.coords = coords.join(',');
+      });
+    }
+  </script>
+</body>
+</html>
