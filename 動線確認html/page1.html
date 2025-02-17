@@ -66,6 +66,27 @@
   <area shape="rect" coords="346,474,616,676" href="page3.html" alt="各事業體尚未建置，可參考金億豐">
 </map>
 <script>
+    window.addEventListener('resize', setAllCoords);
+    window.addEventListener('load', setAllCoords);
+  
+    function setAllCoords() {
+      document.querySelectorAll('img[usemap]').forEach(img => {
+        const map = document.querySelector(`map[name=${img.useMap.replace('#','')}]`);
+        if (!map) return;
+        const widthRatio = img.naturalWidth / img.clientWidth;
+        const heightRatio = img.naturalHeight / img.clientHeight;
+        map.querySelectorAll('area').forEach(area => {
+          const originalCoords = area.dataset.coords || area.coords;
+          area.dataset.coords = originalCoords;
+          const coords = originalCoords.split(',').map((coord, index) => {
+            return Math.round(coord / (index % 2 === 0 ? widthRatio : heightRatio));
+          });
+          area.coords = coords.join(',');
+        });
+      });
+    }
+  </script>
+<script>
     // 確保圖片映射在行動裝置上可用
     window.addEventListener('resize', setCoords);
     window.addEventListener('load', setCoords);
