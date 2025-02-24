@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地產公司聯絡我們</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .contact-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .contact-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .contact-form select, 
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        .row div {
+            flex: 1;
+        }
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: black;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <form class="contact-form">
+        <label for="company">公司分類</label>
+        <select id="company" name="company">
+            <option value="a">A 公司</option>
+            <option value="b">B 公司</option>
+            <option value="c">C 公司</option>
+        </select>
+
+        <div class="row">
+            <div>
+                <label for="name" class="required">姓名</label>
+                <input type="text" id="name" name="name" placeholder="請輸入姓名" required>
+            </div>
+            <div>
+                <label for="email">電子信箱</label>
+                <input type="email" id="email" name="email" placeholder="請輸入電子郵件">
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label for="phone" class="required">聯絡電話</label>
+                <input type="tel" id="phone" name="phone" placeholder="請輸入聯絡電話" required>
+            </div>
+            <div>
+                <label for="mobile" class="required">行動電話</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="請輸入行動電話" required>
+            </div>
+        </div>
+
+        <label for="message" class="required">需求說明</label>
+        <textarea id="message" name="message" placeholder="請詳細填寫您的需求" required></textarea>
+
+        <button type="submit" class="submit-btn">確定送出</button>
+    </form>
+
+</body>
+</html>

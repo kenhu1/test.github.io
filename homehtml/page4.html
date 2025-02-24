@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>建案介紹</title>
+  <style>
+    img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+
+  <img src="./title.png" usemap="#webmap" alt="官網設計圖" style="width:100%;">
+  <map name="webmap">
+    <area shape="rect" coords="651,8,788,102" href="page1.html" alt="關於我們">
+    <area shape="rect" coords="811,12,920,106" href="page2.html" alt="服務項目">
+    <area shape="rect" coords="949,10,1092,104" href="page3.html" alt="事業體介紹">
+    <area shape="rect" coords="1097,6,1245,106" href="page4.html" alt="建案介紹">
+    <area shape="rect" coords="1259,12,1374,110" href="page5.html" alt="都更專區">
+    <area shape="rect" coords="1396,10,1530,102" href="page6.html" alt="最新消息">
+    <area shape="rect" coords="1551,4,1676,102" href="page7.html" alt="人才招募">
+    <area shape="rect" coords="1690,10,1887,110" href="page8.html" alt="聯絡我們">
+    <area shape="rect" coords="39,2,160,110" href="homepage.html" alt="LOGO">
+  </map>
+<img src="./F501.png" usemap="#webmap2" alt="官網設計圖" style="width:100%;">
+
+
+
+<!-- 頁尾 -->
+<img src="F08.png" usemap="#webmap4" alt="">
+<map name="webmap4">
+  <area shape="rect" coords="439,71,680,143" href="page8.html" alt="聯絡我們">
+  <area shape="rect" coords="820,104,916,154" href="page1.html" alt="關於我們">
+  <area shape="rect" coords="932,100,1035,158" href="page2.html" alt="服務項目">
+  <area shape="rect" coords="1043,100,1177,162" href="page3.html" alt="事業體介紹">
+  <area shape="rect" coords="1177,98,1287,156" href="page4.html" alt="建案介紹">
+  <area shape="rect" coords="1301,102,1395,154" href="page5.html" alt="都更專區">
+  <area shape="rect" coords="1417,104,1519,158" href="page6.html" alt="最新消息">
+  <area shape="rect" coords="1535,104,1637,154" href="page7.html" alt="人才招募">
+  <area shape="rect" coords="440,382,304,334" href="https://www.fivetothetenth.com/" alt="宏國建設">
+  <area shape="rect" coords="304,380,442,422" href="homepage.html" alt="宏道地產">
+  <area shape="rect" coords="654,332,824,382" href="https://www.caesarpark.com.tw/#gsc.tab=0" alt="凱撒飯店連鎖">
+  <area shape="rect" coords="997,332,1213,382" href="https://www.hdut.edu.tw/" alt="宏國徳霖科技大學">
+  <area shape="rect" coords="1357,332,1525,376" href="http://yuhchi.org.tw/" alt="林郁琪基金會">
+  <area shape="rect" coords="1343,376,1547,420" href="https://www.grandvision.org.tw/" alt="見賢思齊">
+  <area shape="rect" coords="1345,426,1579,472" href="https://twnsdpa.org.tw/" alt="宏道運動">
+  <area shape="rect" coords="348,432,466,468" href="page3.html" alt="金億豐">
+  <area shape="rect" coords="346,474,616,676" href="page3.html" alt="各事業體尚未建置，可參考金億豐">
+  <area shape="rect" coords="278,38,439,209" href="homepage.html" alt="logo">
+</map>
+<script>
+  window.addEventListener('resize', setAllCoords);
+  window.addEventListener('load', setAllCoords);
+
+  function setAllCoords() {
+    document.querySelectorAll('img[usemap]').forEach(img => {
+      const map = document.querySelector(`map[name=${img.useMap.replace('#','')}]`);
+      if (!map) return;
+      const widthRatio = img.naturalWidth / img.clientWidth;
+      const heightRatio = img.naturalHeight / img.clientHeight;
+      map.querySelectorAll('area').forEach(area => {
+        const originalCoords = area.dataset.coords || area.coords;
+        area.dataset.coords = originalCoords;
+        const coords = originalCoords.split(',').map((coord, index) => {
+          return Math.round(coord / (index % 2 === 0 ? widthRatio : heightRatio));
+        });
+        area.coords = coords.join(',');
+      });
+    });
+  }
+</script>
+<script>
+    // 確保圖片映射在行動裝置上可用
+    window.addEventListener('resize', setCoords);
+    window.addEventListener('load', setCoords);
+  
+    function setCoords() {
+      const img = document.querySelector('img[usemap]');
+      const map = document.querySelector('map');
+      const widthRatio = img.naturalWidth / img.clientWidth;
+      const heightRatio = img.naturalHeight / img.clientHeight;
+  
+      map.querySelectorAll('area').forEach(area => {
+        const originalCoords = area.dataset.coords || area.coords;
+        area.dataset.coords = originalCoords;
+        const coords = originalCoords.split(',').map((coord, index) => {
+          return index % 2 === 0 ? coord / widthRatio : coord / heightRatio;
+        });
+        area.coords = coords.join(',');
+      });
+    }
+  </script>
+</body>
+</html>
