@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>官網設計圖連結示意</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    #videoIntro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="videoIntro">
+    <video id="introVideo" autoplay muted playsinline>
+      <source src="./Comp 1.mp4" type="video/mp4">
+      您的瀏覽器不支援播放動畫
+    </video>
+  </div>
+
+  <!-- 圖片與對應區域地圖 -->
+  <img src="./h01.png" usemap="#webmap" alt="官網封面圖">
+  <map name="webmap">
+    <area shape="rect" coords="3,3,306,76" href="newhomepage.html" alt="首頁">
+  </map>
+
+  <img src="h02.png" usemap="#webmap2" alt="全方位服務">
+  <map name="webmap2">
+    <area shape="rect" coords="1387,104,1617,175" href="" alt="功能3">
+  </map>
+
+  <img src="h03.png" usemap="#webmap3" alt="關於我們">
+  <map name="webmap3">
+    <area shape="rect" coords="1247,514,1482,586" href="page1.html" alt="功能3">
+  </map>
+
+  <img src="h04.png" usemap="#webmap4" alt="事業體">
+  <map name="webmap4">
+    <area shape="rect" coords="294,399,525,475" href="page3.html" alt="功能3">
+  </map>
+
+  <img src="h05.png" usemap="#webmap5" alt="歷史建案">
+  <map name="webmap5">
+    <area shape="rect" coords="646,339,786,403" href="page4.html" alt="功能3">
+  </map>
+
+  <img src="h06.png" usemap="#webmap6" alt="亮點優勢">
+  <map name="webmap6">
+    <area shape="rect" coords="0,0,200,200" href="" alt="功能3">
+    <area shape="rect" coords="200,0,400,200" href="" alt="功能4">
+  </map>
+
+  <img src="h07.png" usemap="#webmap7" alt="亮點優勢">
+  <map name="webmap7">
+  </map>
+
+  <img src="h08.png" usemap="#webmap8" alt="亮點優勢">
+  <map name="webmap8">
+    <area shape="rect" coords="439,71,680,143" href="" alt="聯絡我們">
+  </map>
+
+  <img src="h09.png" usemap="#webmap9" alt="聯絡我們">
+  <map name="webmap9">
+    <area shape="rect" coords="439,71,680,143" href="" alt="聯絡我們">
+  </map>
+
+  <img src="h10.png" usemap="#webmap10" alt="底頁">
+  <map name="webmap10">
+    <area href="newhomepage.html" coords="271,20,457,205" shape="rect" title="首頁">
+    <area href="https://www.fivetothetenth.com/" coords="615,97,736,134" shape="rect" title="五感十築">
+    <area href="newhomepage.html" coords="615,141,734,178" shape="rect" title="宏道">
+    <area href="https://www.caesarpark.com.tw/#gsc.tab=0" coords="959,104,1110,146" shape="rect" alt="凱撒飯店連鎖" title="凱撒飯店連鎖">
+    <area href="https://www.hdut.edu.tw/" coords="1299,99,1494,146" shape="rect" alt="德霖" title="德霖">
+    <area href="http://yuhchi.org.tw/" coords="1303,250,1469,286" shape="rect" alt="林郁琪基金會" title="林郁琪基金會">
+    <area href="https://www.grandvision.org.tw/" coords="1304,291,1475,324" shape="rect" alt="見賢思齊" title="見賢思齊">
+    <area href="https://twnsdpa.org.tw/" coords="1304,326,1509,363" shape="rect" alt="宏道運動" title="宏道運動">
+    <area href="" coords="273,427,370,464" shape="rect">
+    <area href="" coords="410,427,494,465" shape="rect">
+    <area href="" coords="533,428,633,469" shape="rect">
+    <area href="" coords="667,430,757,471" shape="rect">
+    <area href="" coords="791,430,880,469" shape="rect">
+    <area href="" coords="917,427,1011,469" shape="rect">
+    <area href="" coords="1048,428,1143,471" shape="rect">
+    <area href="" coords="1529,434,1613,467" shape="rect">
+  </map>
+
+  <script>
+    window.addEventListener('load', () => {
+      const video = document.getElementById('introVideo');
+      const intro = document.getElementById('videoIntro');
+
+      video.addEventListener('ended', () => {
+        intro.style.transition = 'opacity 1s';
+        intro.style.opacity = 0;
+        setTimeout(() => {
+          intro.style.display = 'none';
+        }, 1000);
+      });
+
+      setResponsiveCoords();
+    });
+
+    window.addEventListener('resize', setResponsiveCoords);
+
+    function setResponsiveCoords() {
+      document.querySelectorAll('img[usemap]').forEach(img => {
+        const mapName = img.useMap.replace('#', '');
+        const map = document.querySelector(`map[name="${mapName}"]`);
+        if (!map || !img.complete || !img.naturalWidth) return;
+
+        const widthRatio = img.naturalWidth / img.clientWidth;
+        const heightRatio = img.naturalHeight / img.clientHeight;
+
+        map.querySelectorAll('area').forEach(area => {
+          const originalCoords = area.dataset.originalCoords || area.coords;
+          area.dataset.originalCoords = originalCoords;
+          const coords = originalCoords.split(',').map((coord, index) => {
+            return Math.round(coord / (index % 2 === 0 ? widthRatio : heightRatio));
+          });
+          area.coords = coords.join(',');
+        });
+      });
+    }
+  </script>
+</body>
+</html>
